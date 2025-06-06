@@ -95,3 +95,12 @@ class Map:
             if content == 'start':
                 return pos
         return None
+
+    def try_shoot(self, pos, orientation):
+        wl = None
+        for pos, content in self.state.items():
+            if content == 'wumpus':
+                wl = pos
+        if (wl - pos).normalized() == orientation:
+            self.state[wl] = 'cell'
+            return True

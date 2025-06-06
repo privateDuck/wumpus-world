@@ -1,3 +1,4 @@
+import math
 
 # vec2D.py
 class vec2D:
@@ -93,6 +94,19 @@ class vec2D:
     def __abs__(self):
         return (self.x**2 + self.y**2)**0.5
 
+    def normalized(self):
+        """
+        Returns a new vec2D instance representing the normalized (unit) vector.
+        The original vector remains unchanged.
+        Returns:
+            vec2D: A new vector with the same direction but magnitude 1.
+                   Returns vec2D(0, 0) if the original vector has zero magnitude.
+        """
+        magnitude = abs(self)  # Uses the __abs__ method to get magnitude
+        if magnitude == 0:
+            return vec2D(0, 0)  # Handle zero vector to avoid division by zero
+        return vec2D(self.x / magnitude, self.y / magnitude)
+
     def __hash__(self):
         """
         Returns a hash value for the vec2D object.
@@ -100,3 +114,35 @@ class vec2D:
         A common way for simple objects is to hash a tuple of their immutable attributes.
         """
         return hash((self.x, self.y))  # Hash a tuple of the coordinates
+
+    @staticmethod
+    def dot(v1, v2):
+        """
+        Computes the dot product of two vec2D vectors.
+        Args:
+            v1 (vec2D): The first vector.
+            v2 (vec2D): The second vector.
+        Returns:
+            float: The dot product.
+        Raises:
+            TypeError: If inputs are not vec2D instances.
+        """
+        if not isinstance(v1, vec2D) or not isinstance(v2, vec2D):
+            raise TypeError("dot_product requires two vec2D instances.")
+        return v1.x * v2.x + v1.y * v2.y
+
+    @staticmethod
+    def distance(v1, v2):
+        """
+        Computes the Euclidean distance between two vec2D points.
+        Args:
+            v1 (vec2D): The first point.
+            v2 (vec2D): The second point.
+        Returns:
+            float: The Euclidean distance.
+        Raises:
+            TypeError: If inputs are not vec2D instances.
+        """
+        if not isinstance(v1, vec2D) or not isinstance(v2, vec2D):
+            raise TypeError("distance requires two vec2D instances.")
+        return math.sqrt((v2.x - v1.x) ** 2 + (v2.y - v1.y) ** 2)

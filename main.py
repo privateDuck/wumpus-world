@@ -41,7 +41,7 @@ class WumpusWorldGame:
             )
 
 
-            self.clock.tick(5)
+            self.clock.tick(2)
 
         self.renderer.quit()
 

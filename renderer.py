@@ -94,7 +94,7 @@ class WumpusWorldRenderer:
         surface = None
         if content == 'safe':
             surface = pygame.draw.rect(self.screen, self.GREEN, rect.inflate(-10, -10), 2)
-        elif content == 'unsafe':
+        else:
             surface = pygame.draw.rect(self.screen, self.RED, rect.inflate(-10, -10), 2)
 
     def _draw_agent(self, pos: vec2D, direction: str):
